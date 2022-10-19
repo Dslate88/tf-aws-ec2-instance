@@ -3,11 +3,6 @@ variable "ami" {
   type = string
 }
 
-variable "bastion_name" {
-  type    = string
-  default = "bastion_host"
-}
-
 variable "disable_api_termination" {
   type        = bool
   description = "true requires console termination"

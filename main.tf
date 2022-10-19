@@ -1,5 +1,5 @@
 resource "aws_security_group" "bastion" {
-  name   = "${var.stack_name}_${var.bastion_name}"
+  name   = "${var.stack_name}_${var.env}_sg"
   vpc_id = var.vpc_id
   ingress {
     cidr_blocks = ["0.0.0.0/0"]

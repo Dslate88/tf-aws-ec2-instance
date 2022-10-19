@@ -2,7 +2,6 @@ locals {
   stack_name = "test"
   env        = "dev"
 
-  bastion_name            = "ec2_bastion"
   disable_api_termination = false
   instance_type           = "t3.nano"
   key_name                = "macbook-key-pair"
@@ -31,7 +30,6 @@ module "bastion" {
   env        = local.env
 
   ami                     = data.aws_ami.ubuntu.id
-  bastion_name            = local.bastion_name
   disable_api_termination = local.disable_api_termination
   # iam_instance_profile    = local.instance_profile
   instance_type = local.instance_type
