@@ -8,6 +8,10 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
   }
+  tags = {
+    Stack = var.stack_name,
+    Env   = var.env
+  }
 }
 
 
