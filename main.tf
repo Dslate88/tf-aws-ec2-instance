@@ -14,7 +14,6 @@ resource "aws_security_group" "bastion" {
   }
 }
 
-
 resource "aws_instance" "bastion" {
   ami                     = var.ami
   disable_api_termination = var.disable_api_termination

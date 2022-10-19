@@ -1,7 +1,12 @@
 locals {
-  stack_name = "test"
+  # general
+  stack_name = "test_ec2_bastion"
   env        = "dev"
 
+  # instance profile
+  s3_bucket_name = "account-junk-nonversioned"
+
+  # baston
   disable_api_termination = false
   instance_type           = "t3.nano"
   key_name                = "macbook-key-pair"
@@ -22,8 +27,28 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
-# TODO: create additional sg_id var/logic
-# TODO: create iam_instance_profile var/logic
+# TODO: add perms as you build out bastion
+data "aws_iam_policy_document" "additional" {
+  statement {
+    sid = "TestSid"
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+    resources = [
+      "arn:aws:s3:::account-keeps-nonversioned/"
+    ]
+  }
+}
+
+module "instance_profile" {
+  source               = "git@github.com:Dslate88/tf-aws-instance-profile.git"
+  stack_name           = local.stack_name
+  env                  = local.env
+  s3_bucket_name       = local.s3_bucket_name
+  addl_policy_document = data.aws_iam_policy_document.additional.json
+}
+
 module "bastion" {
   source     = "./.."
   stack_name = local.stack_name
