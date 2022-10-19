@@ -1,7 +1,6 @@
 resource "aws_security_group" "bastion" {
-  name        = "${var.stack_name}_${var.bastion_name}"
-  description = "proxy host for whatever pattern I decide to use..."
-  vpc_id      = var.vpc_id
+  name   = "${var.stack_name}_${var.bastion_name}"
+  vpc_id = var.vpc_id
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
     description = "allows"
@@ -20,6 +19,8 @@ resource "aws_instance" "bastion" {
   subnet_id               = var.subnet_id
   vpc_security_group_ids  = [aws_security_group.bastion.id]
   tags = {
-    Stack = var.stack_name
+    Name  = var.bastion_name,
+    Stack = var.stack_name,
+    Env   = var.env
   }
 }

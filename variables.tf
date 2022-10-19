@@ -13,6 +13,11 @@ variable "disable_api_termination" {
   description = "true requires console termination"
 }
 
+variable "env" {
+  type        = string
+  description = "[dev/test/prod] identification"
+}
+
 variable "instance_type" {
   type    = string
   default = "t3.micro"
@@ -23,7 +28,8 @@ variable "key_name" {
 }
 
 variable "stack_name" {
-  type = string
+  type        = string
+  description = "Name of the stack responsible for deploying the resource"
 }
 
 variable "subnet_id" {

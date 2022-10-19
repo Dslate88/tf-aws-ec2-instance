@@ -1,7 +1,7 @@
 locals {
   bastion_name            = "ec2_bastion"
   disable_api_termination = false
-  instance_type           = "t3.micro"
+  instance_type           = "t3.nano"
   key_name                = "macbook-key-pair"
   stack_name              = null
   subnet_id               = "subnet-096d9d78fd5ebff5b"
