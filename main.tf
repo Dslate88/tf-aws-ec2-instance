@@ -23,7 +23,7 @@ resource "aws_instance" "bastion" {
   subnet_id               = var.subnet_id
   vpc_security_group_ids  = [aws_security_group.bastion.id]
   tags = {
-    Name  = var.bastion_name,
+    Name  = "bastion_${var.stack_name}_${var.env}"
     Stack = var.stack_name,
     Env   = var.env
   }
