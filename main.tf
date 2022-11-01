@@ -1,12 +1,25 @@
-resource "aws_security_group" "bastion" {
+resource "aws_security_group" "default" {
   name   = "${var.stack_name}_${var.env}_sg"
   vpc_id = var.vpc_id
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
-    description = "allows"
     protocol    = "tcp"
     from_port   = 22
     to_port     = 22
+  }
+  # temp
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    protocol    = "tcp"
+    from_port   = 443
+    to_port     = 443
+  }
+  # temp
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
   }
   tags = {
     Stack = var.stack_name,
